@@ -6,7 +6,7 @@ import { INestApplication } from '@nestjs/common';
 
 import AppConfig from './config/AppConfig';
 import ServerConfig from './config/ServerConfig';
-import WebServerModule from './shared/infrastructure/http/WebServerModule';
+import { WebServerModule } from './shared/infrastructure/http/WebServerModule';
 
 import Log from './Log';
 const log = new Log('app');
