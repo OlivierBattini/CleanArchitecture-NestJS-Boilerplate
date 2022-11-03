@@ -6,7 +6,7 @@ import { INestApplication } from '@nestjs/common';
 
 import AppConfig from './config/AppConfig';
 import ServerConfig from './config/ServerConfig';
-import { WebServerModule } from './shared/infrastructure/http/WebServerModule';
+import { HttpModule } from './shared/infrastructure/http/http.module';
 
 import Log from './Log';
 const log = new Log('app');
@@ -46,6 +46,7 @@ export class App {
       } else {
         log.info(`Worker #${process.pid} running`);
 
+        log.info('Initializing NestJS');
         let nestOptions = {};
         if (ServerConfig.httpsEnabled) {
           nestOptions = {
@@ -57,7 +58,7 @@ export class App {
         }
 
         NestFactory
-          .create(WebServerModule, nestOptions)
+          .create(HttpModule, nestOptions)
           .then((nestApp: INestApplication) => nestApp.listen(ServerConfig.port));
       }
     } catch (error) {
