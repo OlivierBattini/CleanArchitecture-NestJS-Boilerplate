@@ -9,13 +9,13 @@ import { CreateTaskResponse } from '../dtos/CreateTaskResponse.dto';
 @Controller(Constants.API_PREFIX_TASKS)
 export class TaskController {
   constructor(
-    @Inject(Constants.DI_TASK_MODEL)
-    private _taskService: ITaskRepository,
+    @Inject(Constants.DI_TASK_REPOSITORY)
+    private _taskRepository: ITaskRepository,
   ) {}
 
   @Get()
   async fetchAllTasks(): Promise<FetchAllTasksResponse> {
-    const tasks = await this._taskService.findAll();
+    const tasks = await this._taskRepository.findAll();
 
     const response = new FetchAllTasksResponse();
     response.tasks = tasks.map((task) => {
@@ -32,7 +32,7 @@ export class TaskController {
   async createTask(
     @Body() request: CreateTaskRequest
   ): Promise<CreateTaskResponse> {
-    const newTask = await this._taskService.create(request.description);
+    const newTask = await this._taskRepository.create(request.description);
     
     const response = new CreateTaskResponse();
     response.task = {

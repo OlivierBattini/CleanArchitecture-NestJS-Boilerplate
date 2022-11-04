@@ -8,7 +8,7 @@ import { ITaskRepository } from '../abstracts/ITaskRepository.abstract';
 @Injectable()
 export class TaskRepository implements ITaskRepository {
   constructor(
-    @Inject(Constants.DI_TASK_REPOSITORY)
+    @Inject(Constants.DI_TASK_MODEL)
     private taskModel: typeof TaskModel
   ) {}
 
