@@ -7,7 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import { ITask } from './interfaces/ITask.interface';
+import { ITask } from './abstracts/ITask.interface';
 
 @Table({
   updatedAt: false,
