@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { TaskModule } from 'src/tasks/task.module';
+import { TaskModule } from '../../../tasks/task.module';
 
 @Module({
   // Sub modules from sub domains
