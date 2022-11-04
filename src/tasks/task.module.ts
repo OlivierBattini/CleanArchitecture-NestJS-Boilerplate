@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
 import { Constants } from 'src/config/Constants';
+import { DatabaseModule } from '../shared/infrastructure/data/database.module';
 import { TaskController } from './infrastructure/task.controller';
 import { TaskRepository } from './infrastructure/task.repository';
-import { DatabaseModule } from '../shared/infrastructure/data/database.module';
 import { TaskModel } from './infrastructure/task.model';
 
 @Module({
@@ -11,12 +11,12 @@ import { TaskModel } from './infrastructure/task.model';
   controllers: [ TaskController ],
   providers: [
     {
-      provide: Constants.DI_TASK_REPOSITORY,
-      useValue: TaskRepository,
-    },
-    {
       provide: Constants.DI_TASK_MODEL,
       useValue: TaskModel,
+    },
+    {
+      provide: Constants.DI_TASK_REPOSITORY,
+      useClass: TaskRepository,
     },
   ],
 })
