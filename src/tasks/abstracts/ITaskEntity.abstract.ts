@@ -1,4 +1,4 @@
-export interface ITask {
+export interface ITaskEntity {
   id: string;
   description: string;
   isDone: boolean;

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { TasksModule } from 'src/tasks/tasks.module';
+import { TaskModule } from 'src/tasks/task.module';
 
 @Module({
   // Sub modules from sub domains
-  imports: [ TasksModule ],
+  imports: [ TaskModule ],
 })
 export class HttpModule {}
