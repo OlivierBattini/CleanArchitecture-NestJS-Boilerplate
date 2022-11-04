@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 
-import { Constants } from 'src/config/Constants';
+import { Constants } from '../../config/Constants';
 import { ITaskRepository } from '../abstracts/ITaskRepository.abstract';
 import { CreateTaskRequest } from '../dtos/CreateTaskRequest.dto';
 import { FetchAllTasksResponse } from '../dtos/FetchAllTasksResponse.dto';

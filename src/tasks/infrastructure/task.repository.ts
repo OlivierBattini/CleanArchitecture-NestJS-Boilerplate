@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Constants } from 'src/config/Constants';
+import { Constants } from '../../config/Constants';
 import { TaskModel } from './task.model';
 import { ITaskRepository } from '../abstracts/ITaskRepository.abstract';
 

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { Constants } from 'src/config/Constants';
+import { Constants } from '../config/Constants';
 import { DatabaseModule } from '../shared/infrastructure/data/database.module';
 import { TaskController } from './infrastructure/task.controller';
 import { TaskRepository } from './infrastructure/task.repository';

@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { Constants } from 'src/config/Constants';
-import DatabaseConfig from 'src/config/DatabaseConfig';
+import { Constants } from '../../../config/Constants';
+import DatabaseConfig from '../../../config/DatabaseConfig';
 
 import { TaskModel } from '../../../tasks/infrastructure/task.model';
 

@@ -2,11 +2,11 @@ import fs from 'fs';
 import { NestFactory } from "@nestjs/core";
 import { INestApplication } from '@nestjs/common';
 
-import ServerConfig from "src/config/ServerConfig";
+import ServerConfig from "../../../config/ServerConfig";
 import { HttpModule } from './http.module';
 import { ClassValidatorPipe } from './pipes/class-validator.pipe';
 
-async function bootstrap() {
+async function bootstrap(): Promise<INestApplication> {
   let nestOptions = {};
   if (ServerConfig.httpsEnabled) {
     nestOptions = {
@@ -17,12 +17,13 @@ async function bootstrap() {
     };
   }
 
-  NestFactory
+  return NestFactory
     .create(HttpModule, nestOptions)
     .then((nestApp: INestApplication) => {
       nestApp
         .useGlobalPipes(new ClassValidatorPipe())
         .listen(ServerConfig.port);
+      return nestApp;
     });
 }
 
