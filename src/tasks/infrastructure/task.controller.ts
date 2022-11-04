@@ -1,20 +1,21 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 
 import { Constants } from 'src/config/Constants';
-import { CreateTaskRequest } from './dtos/CreateTaskRequest.dto';
-import { TasksService } from './tasks.service';
-import { FetchAllTasksResponse } from './dtos/FetchAllTasksResponse.dto';
-import { CreateTaskResponse } from './dtos/CreateTaskResponse.dto';
+import { ITaskRepository } from '../abstracts/ITaskRepository.abstract';
+import { CreateTaskRequest } from '../dtos/CreateTaskRequest.dto';
+import { FetchAllTasksResponse } from '../dtos/FetchAllTasksResponse.dto';
+import { CreateTaskResponse } from '../dtos/CreateTaskResponse.dto';
 
-@Controller(Constants.TASKS_PREFIX)
-export class TasksController {
+@Controller(Constants.API_PREFIX_TASKS)
+export class TaskController {
   constructor(
-    private _tasksService: TasksService,
+    @Inject(Constants.DI_TASK_MODEL)
+    private _taskService: ITaskRepository,
   ) {}
 
   @Get()
   async fetchAllTasks(): Promise<FetchAllTasksResponse> {
-    const tasks = await this._tasksService.findAll();
+    const tasks = await this._taskService.findAll();
 
     const response = new FetchAllTasksResponse();
     response.tasks = tasks.map((task) => {
@@ -31,7 +32,7 @@ export class TasksController {
   async createTask(
     @Body() request: CreateTaskRequest
   ): Promise<CreateTaskResponse> {
-    const newTask = await this._tasksService.create(request.description);
+    const newTask = await this._taskService.create(request.description);
     
     const response = new CreateTaskResponse();
     response.task = {

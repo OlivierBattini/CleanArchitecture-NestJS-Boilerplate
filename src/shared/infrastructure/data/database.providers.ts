@@ -3,15 +3,15 @@ import { Sequelize } from 'sequelize-typescript';
 import { Constants } from 'src/config/Constants';
 import DatabaseConfig from 'src/config/DatabaseConfig';
 
-import { Task } from '../../../tasks/Task.entity';
+import { TaskModel } from '../../../tasks/infrastructure/task.model';
 
 export const databaseProviders = [
   {
-    provide: Constants.SEQUELIZE,
+    provide: Constants.DI_SEQUELIZE,
     useFactory: async () => {
       const sequelize = new Sequelize(DatabaseConfig.dbUrl, {
         logging: false,
-        models: [ Task ],
+        models: [ TaskModel ],
       });
       await sequelize.sync();
       return sequelize;

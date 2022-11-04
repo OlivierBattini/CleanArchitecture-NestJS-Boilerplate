@@ -1,13 +1,12 @@
 /**
- * General & NestJS constants
+ * General constants and DI tokens
  */
 export enum Constants {
-    // Controllers
-    TASKS_PREFIX = 'tasks',
+    // API prefixes
+    API_PREFIX_TASKS = 'tasks',
 
-    // Database
-    SEQUELIZE = 'SEQUELIZE',
-
-    // Repositories
-    TASKS_REPOSITORY = 'TASKS_REPOSITORY',
+    // Dependency Injection tokens
+    DI_TASK_REPOSITORY = 'DI_TASK_REPOSITORY',
+    DI_TASK_MODEL = 'DI_TASK_MODEL',
+    DI_SEQUELIZE = 'DI_SEQUELIZE',
 }
