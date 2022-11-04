@@ -6,7 +6,7 @@ import { INestApplication } from '@nestjs/common';
 
 import AppConfig from './config/AppConfig';
 import ServerConfig from './config/ServerConfig';
-import { HttpModule } from './shared/infrastructure/http/http.module';
+import bootstrap from './shared/infrastructure/http';
 
 import Log from './Log';
 const log = new Log('app');
@@ -47,19 +47,7 @@ export class App {
         log.info(`Worker #${process.pid} running`);
 
         log.info('Initializing NestJS');
-        let nestOptions = {};
-        if (ServerConfig.httpsEnabled) {
-          nestOptions = {
-            httpsOptions: {
-              key: fs.readFileSync(ServerConfig.sslKeyPath),
-              cert: fs.readFileSync(ServerConfig.sslCertificatePath),
-            }
-          };
-        }
-
-        NestFactory
-          .create(HttpModule, nestOptions)
-          .then((nestApp: INestApplication) => nestApp.listen(ServerConfig.port));
+        bootstrap();
       }
     } catch (error) {
       log.error('Exception while starting Application :', error);

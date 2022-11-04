@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { Constants } from 'src/config/Constants';
-import { TaskDto } from './dtos/task.dto';
 import { CreateTaskRequest } from './dtos/CreateTaskRequest.dto';
 import { TasksService } from './tasks.service';
+import { FetchAllTasksResponse } from './dtos/FetchAllTasksResponse.dto';
+import { CreateTaskResponse } from './dtos/CreateTaskResponse.dto';
 
 @Controller(Constants.TASKS_PREFIX)
 export class TasksController {
@@ -12,27 +13,33 @@ export class TasksController {
   ) {}
 
   @Get()
-  async fetchAllTasks(): Promise<TaskDto[]> {
+  async fetchAllTasks(): Promise<FetchAllTasksResponse> {
     const tasks = await this._tasksService.findAll();
-    return tasks.map((task) => {
+
+    const response = new FetchAllTasksResponse();
+    response.tasks = tasks.map((task) => {
       return {
         id: task.id,
         description: task.description,
         isDone: task.isDone,
         createdAt: task.createdAt.toJSON(),
     }});
+    return response;
   }
 
   @Post()
   async createTask(
     @Body() request: CreateTaskRequest
-  ): Promise<TaskDto> {
+  ): Promise<CreateTaskResponse> {
     const newTask = await this._tasksService.create(request.description);
-    return {
+    
+    const response = new CreateTaskResponse();
+    response.task = {
       id: newTask.id,
       description: newTask.description,
       isDone: newTask.isDone,
       createdAt: newTask.createdAt.toJSON(),
-    };
+    }
+    return response;
   }
 }
