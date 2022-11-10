@@ -6,6 +6,8 @@ export enum Constants {
     API_PREFIX_TASKS = 'tasks',
 
     // Dependency Injection tokens
+    DI_TASK_USECASES = 'DI_TASK_USECASES',
+    DI_TASK_FACTORY = 'DI_TASK_FACTORY',
     DI_TASK_REPOSITORY = 'DI_TASK_REPOSITORY',
     DI_TASK_MODEL = 'DI_TASK_MODEL',
     DI_SEQUELIZE = 'DI_SEQUELIZE',
